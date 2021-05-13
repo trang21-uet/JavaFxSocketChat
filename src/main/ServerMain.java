@@ -12,15 +12,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Server extends Application {
+public class ServerMain extends Application {
+    private static final int WINDOW_WIDTH = 1024;
+    public static final int WINDOW_HEIGHT = 680;
 
     @Override
     public void start(Stage stage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Server.fxml"));
-        stage.setTitle("Simple Java Socket Chat - Server");
+        Parent root = FXMLLoader.load(getClass().getResource("../JavaFX/Server.fxml"));
+        stage.setTitle("Chương trình chat room đơn giản - Server");
         Image icon = new Image("Images/icon.jpg");
         stage.getIcons().add(icon);
-        stage.setScene(new Scene(root, 1280, 720));
+        stage.setScene(new Scene(root,WINDOW_WIDTH,WINDOW_HEIGHT));
         stage.show();
 
         stage.setOnCloseRequest(event -> {
