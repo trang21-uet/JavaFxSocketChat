@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.ClientFX">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFX.ClientFX">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -23,27 +23,27 @@
                     <font>
                         <Font size="25.0" />
                     </font>
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#clearMessage" text="Xóa màn hình" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
-               <effect>
-                  <DropShadow />
-               </effect>
+                    <contextMenu>
+                        <ContextMenu>
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#clearMessage" text="Xóa màn hình" />
+                            </items>
+                        </ContextMenu>
+                    </contextMenu>
+                    <effect>
+                        <DropShadow />
+                    </effect>
                 </TextArea>
                 <TextField fx:id="msgTextField" layoutX="14.0" layoutY="672.0" prefHeight="82.0" promptText="Nhập tin nhắn..." AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="167.0">
                     <font>
                         <Font size="25.0" />
                     </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="TEXT" />
+                    </cursor>
                 </TextField>
                 <Button defaultButton="true" layoutX="1131.0" layoutY="672.0" mnemonicParsing="false" onAction="#sendMsg" prefHeight="82.0" prefWidth="135.0" text="Gửi" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                     <cursor>
@@ -52,26 +52,26 @@
                     <font>
                         <Font size="25.0" />
                     </font>
-               <tooltip>
-                  <Tooltip text="Gửi tin nhắn đến server" />
-               </tooltip>
-               <effect>
-                  <DropShadow />
-               </effect>
+                    <tooltip>
+                        <Tooltip text="Gửi tin nhắn đến server" />
+                    </tooltip>
+                    <effect>
+                        <DropShadow />
+                    </effect>
                 </Button>
-            <Label layoutX="39.0" text="Client">
-               <font>
-                  <Font name="System Bold" size="80.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop color="RED" />
-                        <Stop color="#0400ff" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
+                <Label layoutX="39.0" text="Client">
+                    <font>
+                        <Font name="System Bold" size="80.0" />
+                    </font>
+                    <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop color="RED" />
+                                <Stop color="#0400ff" offset="1.0" />
+                            </stops>
+                        </LinearGradient>
+                    </textFill>
+                </Label>
             </children>
         </AnchorPane>
     </center>
@@ -94,7 +94,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Trợ giúp">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Thông tin ứng dụng" />
+                        <MenuItem mnemonicParsing="false" onAction="#info" text="Thông tin ứng dụng" />
                     </items>
                 </Menu>
             </menus>

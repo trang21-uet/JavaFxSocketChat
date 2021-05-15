@@ -1,44 +1,47 @@
-package JavaFX;
+package javaFX;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import socket.ReadThread;
 import socket.Client;
+import socket.ReadThread;
 
 import java.io.IOException;
 import java.util.Optional;
 
-import static javafx.scene.control.ButtonType.CANCEL;
-
 public class ClientFX {
 
-    @FXML
-    private TextField msgTextField;
+    public static final String INFO = """
+            Chương trình chat room đơn giản sử dụng Java Socket và JavaFx
+
+            Chức năng:
+                - Kết nối đến server tại cổng người dùng nhập.
+                - Đặt tên & đổi tên cho client.
+                - Gửi tin nhắn đến server.
+            """;
+    private final static int DEFAULT_PORT = 0;
+    private final static String DEFAULT_NAME = "Client";
     @FXML
     public TextArea msgTextArea;
-
-    final static int DEFAULT_PORT = 0;
-    final static String DEFAULT_NAME = "Client";
     public Client client;
+    @FXML
+    private TextField msgTextField;
     private int port;
     private String name;
 
-    public ClientFX(){
+    public ClientFX() {
+        port = DEFAULT_PORT;
+        name = DEFAULT_NAME;
         takePort();
         takeName();
         try {
             client = new Client(port, name);
-            Platform.runLater(() -> {
-                msgTextArea.appendText("Đã kết nối với máy chủ tại cổng " + port + "\n");
-            });
+            Platform.runLater(() -> msgTextArea.appendText("Đã kết nối với máy chủ tại cổng " + port + "\n"));
             Thread thread = new Thread(new ReadThread(this));
             thread.start();
         } catch (IOException e) {
-            Platform.runLater(()-> {
-                msgTextArea.appendText("Có lỗi khi kết nối đến máy chủ!\n");
-            });
+            Platform.runLater(() -> msgTextArea.appendText("Có lỗi khi kết nối đến máy chủ!\n"));
 
             e.printStackTrace();
         }
@@ -52,20 +55,17 @@ public class ClientFX {
     }
 
     public void takePort() {
-        TextInputDialog portDialog = new TextInputDialog();
+        TextInputDialog portDialog = new TextInputDialog(String.valueOf(port));
         portDialog.setTitle("Kết nối đến máy chủ");
         portDialog.setHeaderText("Mời nhập cổng của máy chủ");
         portDialog.setContentText("Cổng: ");
         Optional<String> result = portDialog.showAndWait();
         try {
-            if (!result.isPresent()) {
+            if (result.isEmpty()) {
                 Platform.exit();
                 System.exit(0);
-            }
-            else if (result.isEmpty()) {
-                port = DEFAULT_PORT;
             } else {
-                port = Integer.parseInt(result.get());
+                port = Integer.parseInt(result.get().trim());
             }
         } catch (NumberFormatException e) {
             errorAlert();
@@ -76,18 +76,15 @@ public class ClientFX {
     }
 
     public void takeName() {
-        TextInputDialog nameDialog = new TextInputDialog();
+        TextInputDialog nameDialog = new TextInputDialog(name);
         nameDialog.setTitle("Kết nối máy chủ thành công");
         nameDialog.setHeaderText("Mời nhập tên của bạn!");
         nameDialog.setContentText("Tên: ");
         Optional<String> result = nameDialog.showAndWait();
-        if (!result.isPresent()) {
+        if (result.isEmpty()) {
             Platform.exit();
-        }
-        else if (result.isEmpty()) {
-            name = DEFAULT_NAME;
         } else {
-            name = result.get();
+            name = result.get().trim();
         }
     }
 
@@ -106,6 +103,16 @@ public class ClientFX {
 
     public void clearMessage(ActionEvent event) {
         msgTextArea.clear();
+    }
+
+    public void info(ActionEvent e) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setWidth(400);
+        alert.setHeight(300);
+        alert.setTitle("Giới thiệu chương trình");
+        alert.setHeaderText("Phần mềm chat room đơn giản - Client");
+        alert.setContentText(INFO);
+        alert.showAndWait();
     }
 
     public void exit(ActionEvent e) throws IOException {

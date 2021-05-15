@@ -1,49 +1,53 @@
-package JavaFX;
+package javaFX;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import socket.SendThread;
 import socket.Server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Optional;
 
 public class ServerFX {
 
+    public static final String INFO = """
+            Chương trình chat room đơn giản sử dụng Java Socket và JavaFx
+
+            Chức năng:
+                - Tạo server tại cổng do người dùng nhập.
+                - Chấp nhận yêu cầu kết nối của các client.
+                - Nhận tin nhắn của client gửi & chuyển đến các client khác.
+            """;
+    private static final int DEFAULT_PORT = 0;
     @FXML
     public TextArea msgTextArea;
-
-    final static int DEFAULT_PORT = 0;
     public Server server;
     int port;
 
-    public ServerFX(){
+    public ServerFX() {
+        port = DEFAULT_PORT;
         takePort();
-        new Thread(() ->{
+        new Thread(() -> {
             try {
                 server = new Server(port);
-                Platform.runLater(() -> {
-                    msgTextArea.appendText("Đã tạo máy chủ tại cổng " + port + "\n");
-                });
+                Platform.runLater(() -> msgTextArea.appendText("Đã tạo máy chủ tại cổng " + port + ".\n"));
 
                 while (true) {
                     Socket s = server.serverSocket.accept();
                     SendThread sendThread = new SendThread(s, this);
-                    server.clients.add(sendThread);
+                    server.clientThread.add(sendThread);
+                    Platform.runLater(() -> msgTextArea.appendText("Client đã kết nối.\n"));
                     Thread thread = new Thread(sendThread);
                     thread.start();
                 }
             } catch (IOException e) {
-                Platform.runLater(() -> {
-                    msgTextArea.appendText("Có lỗi khi khởi tạo máy chủ!\n");
-                });
+                Platform.runLater(() -> msgTextArea.appendText("Có lỗi khi khởi tạo máy chủ!\n"));
                 e.printStackTrace();
             }
         }).start();
@@ -57,19 +61,17 @@ public class ServerFX {
     }
 
     public void takePort() {
-        TextInputDialog portDialog = new TextInputDialog();
+        TextInputDialog portDialog = new TextInputDialog(String.valueOf(port));
         portDialog.setTitle("Tạo máy chủ mới");
         portDialog.setHeaderText("Mời nhập cổng của máy chủ");
         portDialog.setContentText("Cổng: ");
         Optional<String> result = portDialog.showAndWait();
         try {
-            if (!result.isPresent()) {
+            if (result.isEmpty()) {
                 Platform.exit();
                 System.exit(0);
-            } else if (result.isEmpty()){
-                port = DEFAULT_PORT;
             } else {
-                port = Integer.parseInt(result.get());
+                port = Integer.parseInt(result.get().trim());
             }
         } catch (NumberFormatException e) {
             errorAlert();
@@ -79,8 +81,18 @@ public class ServerFX {
         }
     }
 
-     public void clearMessage(ActionEvent event) {
+    public void clearMessage(ActionEvent event) {
         msgTextArea.clear();
+    }
+
+    public void info(ActionEvent e) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setWidth(400);
+        alert.setHeight(300);
+        alert.setTitle("Giới thiệu chương trình");
+        alert.setHeaderText("Phần mềm chat room đơn giản - Server");
+        alert.setContentText(INFO);
+        alert.showAndWait();
     }
 
     public void exit(ActionEvent e) throws IOException {

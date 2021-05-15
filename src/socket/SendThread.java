@@ -1,6 +1,6 @@
 package socket;
 
-import JavaFX.ServerFX;
+import javaFX.ServerFX;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SendThread implements Runnable{
+public class SendThread implements Runnable {
     Socket socket;
     ServerFX serverFX;
     Scanner in;
@@ -29,9 +29,7 @@ public class SendThread implements Runnable{
                 if (in.hasNextLine()) {
                     String message = in.nextLine();
                     serverFX.server.sendToAll(message);
-                    Platform.runLater(()-> {
-                        serverFX.msgTextArea.appendText(message + "\n");
-                    });
+                    Platform.runLater(() -> serverFX.msgTextArea.appendText(message + "\n"));
                 }
             }
         } catch (IOException e) {

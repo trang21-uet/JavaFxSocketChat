@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Server {
     public ServerSocket serverSocket;
-    public List<SendThread> clients = new ArrayList<>();
+    public List<SendThread> clientThread = new ArrayList<>();
     int port;
 
     public Server(int port) throws IOException {
@@ -21,7 +21,7 @@ public class Server {
      * @param msg nội dung tin nhắn cần gửi.
      */
     public void sendToAll(String msg) {
-        for (SendThread client : clients) {
+        for (SendThread client : clientThread) {
             client.sendMessage(msg);
         }
     }

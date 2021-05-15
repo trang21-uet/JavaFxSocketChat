@@ -5,17 +5,13 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
-    private static final String LOCAL_HOST = "localhost";
+    private static final String SERVER_IP = "localhost";
     private String name;
-    private Socket socket;
+    private final Socket socket;
 
     public Client(int port, String name) throws IOException {
         this.name = name;
-        socket = new Socket(LOCAL_HOST, port);
-    }
-
-    public String getName() {
-        return name;
+        socket = new Socket(SERVER_IP, port);
     }
 
     public void setName(String name) {
