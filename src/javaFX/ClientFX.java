@@ -19,7 +19,7 @@ public class ClientFX {
             "    - Kết nối đến server tại cổng người dùng nhập.\n" +
             "    - Đặt tên & đổi tên cho client.\n" +
             "    - Gửi tin nhắn đến server.\n";
-    private final static int DEFAULT_PORT = 0;
+    private final static int DEFAULT_PORT = 1;
     private final static String DEFAULT_NAME = "Client";
     @FXML
     public TextArea msgTextArea;

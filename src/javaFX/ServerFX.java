@@ -23,7 +23,7 @@ public class ServerFX {
             "    - Tạo server tại cổng do người dùng nhập.\n" +
             "    - Chấp nhận yêu cầu kết nối của các client.\n" +
             "    - Nhận tin nhắn của client gửi & chuyển đến các client khác.\n";
-    private static final int DEFAULT_PORT = 0;
+    private static final int DEFAULT_PORT = 1;
     @FXML
     public TextArea msgTextArea;
     public Server server;
