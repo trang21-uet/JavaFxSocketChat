@@ -12,14 +12,13 @@ import java.util.Optional;
 
 public class ClientFX {
 
-    public static final String INFO = """
-            Chương trình chat room đơn giản sử dụng Java Socket và JavaFx
-
-            Chức năng:
-                - Kết nối đến server tại cổng người dùng nhập.
-                - Đặt tên & đổi tên cho client.
-                - Gửi tin nhắn đến server.
-            """;
+    public static final String INFO =
+            "Chương trình chat room đơn giản sử dụng Java Socket và JavaFx\n" +
+            "\n" +
+            "Chức năng:\n" +
+            "    - Kết nối đến server tại cổng người dùng nhập.\n" +
+            "    - Đặt tên & đổi tên cho client.\n" +
+            "    - Gửi tin nhắn đến server.\n";
     private final static int DEFAULT_PORT = 0;
     private final static String DEFAULT_NAME = "Client";
     @FXML

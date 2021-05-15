@@ -16,14 +16,13 @@ import java.util.Optional;
 
 public class ServerFX {
 
-    public static final String INFO = """
-            Chương trình chat room đơn giản sử dụng Java Socket và JavaFx
-
-            Chức năng:
-                - Tạo server tại cổng do người dùng nhập.
-                - Chấp nhận yêu cầu kết nối của các client.
-                - Nhận tin nhắn của client gửi & chuyển đến các client khác.
-            """;
+    public static final String INFO =
+            "Chương trình chat room đơn giản sử dụng Java Socket và JavaFx\n" +
+            "\n" +
+            "Chức năng:\n" +
+            "    - Tạo server tại cổng do người dùng nhập.\n" +
+            "    - Chấp nhận yêu cầu kết nối của các client.\n" +
+            "    - Nhận tin nhắn của client gửi & chuyển đến các client khác.\n";
     private static final int DEFAULT_PORT = 0;
     @FXML
     public TextArea msgTextArea;
