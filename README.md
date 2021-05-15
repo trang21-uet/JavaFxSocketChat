@@ -4,7 +4,8 @@
 
 **_Chức năng_**: Tạo một server cho phép các client kết nối. Client kết nối đến server và gửi tin nhắn. Server có nhiệm vụ nhận tin nhắn từ client gửi và chuyển tin nhắn đến các client khác.
 
-Sinh viên:
+**_Thành viên nhóm_**:
+
 |STT | Họ và tên            | Mã sinh viên |
 |--  |----------------------|------------- |
 |1   | Nguyễn Xuân Trang    | 19020464     |
